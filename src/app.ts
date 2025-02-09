@@ -4,7 +4,16 @@ import bodyParser from "body-parser";
 import detectRoute from "./routes/detectRoute";
 
 const app = express();
-app.use(cors());
+
+// Konfigurasi CORS
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Izinkan permintaan dari frontend
+    methods: "GET,POST,PUT,DELETE", // Izinkan metode HTTP tertentu
+    credentials: true, // Izinkan pengiriman cookie atau header otentikasi
+  })
+);
+
 app.use(bodyParser.json());
 app.use("/api", detectRoute);
 
